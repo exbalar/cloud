@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
         - name: cloud-demo
-          image: quay.io/exbalar/cloud:latest
+          image: quay.io/exbalar/cloud:release
           imagePullPolicy: Always
           ports:
             - containerPort: 8090
