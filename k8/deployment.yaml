@@ -1,0 +1,25 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: cloud-demo
+  labels:
+    app: cloud-demo
+    sandbox: learn-kubernetes
+    learn-kubernetes: cloud-demo
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: cloud-demo
+  template:
+    metadata:
+      labels:
+        app: cloud-demo
+    spec:
+      containers:
+        - name: cloud-demo
+          image: quay.io/exbalar/cloud:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8090
+              protocol: TCP

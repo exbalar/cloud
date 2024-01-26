@@ -1,0 +1,32 @@
+apiVersion: apps.openshift.io/v1
+kind: DeploymentConfig
+metadata:
+  name: cloud-demo
+  labels:
+    app: cloud-demo
+spec:
+  selector:
+    app: cloud-demo
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: cloud-demo
+    spec:
+      containers:
+        - name: cloud-demo
+          image: quay.io/exbalar/cloud:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8090
+              protocol: TCP
+  triggers:
+  - type: ConfigChange 
+  - imageChangeParams:
+      automatic: true
+      containerNames:
+      - cloud-demo
+      from:
+        kind: ImageStreamTag
+        name: cloud:latest
+    type: ImageChange
